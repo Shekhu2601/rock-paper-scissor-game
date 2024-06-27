@@ -58,6 +58,8 @@ const nextbtn = () => {
   pick.classList.add("hide");
   bannerBox.classList.remove("hide");
   scoreS.classList.add("hide")
+  btnRule.classList.remove("sift");
+  next.classList.add("hide");
 
 };
 // main section
