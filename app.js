@@ -32,6 +32,7 @@ let drawcp = document.querySelector(".drawcp");
 let bannerBox = document.querySelector(".banner-box");
 let scoreS = document.querySelector(".score-board");
 
+
 // Rules
 const showrules = () => {
   rule.classList.remove("hide");
@@ -63,10 +64,17 @@ const nextbtn = () => {
 
 };
 // main section
-let userScore = 0;
-let compScore = 0;
+
 let userScoreData = document.querySelector(".user-score-data");
+
 const compScoreData = document.querySelector(".computer-score-data");
+
+let ifUscoreExists =localStorage.getItem('userScore')
+let ifCscoreExists =localStorage.getItem('compScore')
+
+userScoreData.innerHTML =ifUscoreExists || 0;
+compScoreData.innerHTML =ifCscoreExists || 0;
+
 //Computer Choice
 const genCompChoice = () => {
   const option = ["rock", "paper", "scissor"];
@@ -75,10 +83,31 @@ const genCompChoice = () => {
 };
 
 //Winner
-const shoWinner = (win, userChoice, compChoice) => {
+const shoWinner = (win, userChoice, compChoice) => 
+  {
+    
+   
+
   if (win) {
-    userScore++;
-    userScoreData.innerHTML = userScore;
+
+
+     //local storage
+    {let ifUscoreExists =localStorage.getItem('userScore')
+      if(ifUscoreExists){
+          ifUscoreExists =parseFloat(ifUscoreExists)
+          localStorage.setItem('userScore',ifUscoreExists + 1)
+          ifUscoreExists =localStorage.getItem('userScore')
+          userScoreData.innerText = ifUscoreExists;
+          
+      }
+      else{
+          localStorage.setItem('userScore', 1)
+          ifUscoreExists =localStorage.getItem('userScore')
+          userScoreData.innerText = ifUscoreExists;
+      }}
+    
+    
+    
     console.log("win");
     main.classList.add("hide");
     next.classList.remove("hide");
@@ -110,8 +139,24 @@ const shoWinner = (win, userChoice, compChoice) => {
       compPp.classList.add("hide");
     }
   } else {
-    compScore++;
-    compScoreData.innerHTML = compScore;
+
+// local storage
+
+    {let ifCscoreExists =localStorage.getItem('compScore')
+      if(ifCscoreExists){
+          ifCscoreExists =parseFloat(ifCscoreExists)
+          localStorage.setItem('compScore',ifCscoreExists + 1)
+          ifCscoreExists =localStorage.getItem('compScore')
+          compScoreData.innerText = ifCscoreExists;
+          
+      }
+      else{
+          localStorage.setItem('compScore', 1)
+          ifCscoreExists =localStorage.getItem('compScore')
+          compScoreData.innerText = ifCscoreExists;
+      }}
+    
+    
     console.log("loose!");
     looser.classList.remove("hide");
     main.classList.add("hide");
